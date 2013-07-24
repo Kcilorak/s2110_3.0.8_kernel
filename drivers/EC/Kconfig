@@ -1,0 +1,20 @@
+config EC
+        tristate "EC driver"
+  
+        help
+          This enables support for EC.
+
+config	EC_I2C_GSBI7
+	bool "EC i2c base on GSBI7"
+	depends on EC
+
+	help
+	  This enable ec i2c base on gsbi7.
+
+config  EC_API_DEBUG
+	tristate "EC API debug tool"
+	default m
+	depends on EC
+
+	help
+	  This enable ec api debug function

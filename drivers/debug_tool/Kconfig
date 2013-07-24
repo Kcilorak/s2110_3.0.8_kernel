@@ -1,0 +1,25 @@
+menuconfig MEM_DEBUGTOOL
+	bool "Debug Tool"
+	default y
+	---help---
+	  Debug tool
+
+if MEM_DEBUGTOOL
+
+config	I2C_DEBUG_TOOL
+	tristate "I2C debug tool"
+	default m
+	help
+ 		read 
+ 		echo 1 b(bus)	n(bytes) 0xCC(dev_addr) m(write command number) 0x00(command) > /proc/i2c_debug/i2c
+ 		write
+ 		exho 0 b(bus) n(bytes) 0xCC(dev_addr) 0xAA(sub_dev) 0x03(send_bytes) 0x00(command data[0]) data[1] data[2] > /proc/i2c_debug/i2c
+  		example:
+  			echo 1 3 4 0x19 1 0xd1 > /proc/i2c_debug/i2c				//read
+  			echo 0 3 4 0x19 0x4e 0x03 0xd1 0x04 0x00 > /proc/i2c_debug/i2c		//write
+  			cat /proc/i2c_debug/i2c				//show result
+ 			dev	: 0x19
+ 			reg	: 0xD1
+ 			value	: 0x03 4e 04 00
+
+endif
